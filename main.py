@@ -46,18 +46,19 @@ ax.table(cellText=[data["Values"]], colLabels=data["Metrics"], cellLoc='center',
 plt.show()
 
 # Generating statistics duration
-playlists = spark.read.json("hdfs://localhost:9000/datasets/spotify/playlists.json")
-window = Window.partitionBy("pid").orderBy(desc("last_modification"))
-playlists = playlists.withColumn("row_number", row_number().over(window))
-playlists = playlists.filter(playlists["row_number"] == 1).drop("row_number")
+playlists = spark.read.json("hdfs://localhost:9000/datasets/spotify/playlist.json")
+# window = Window.partitionBy("pid").orderBy(desc("last_modification"))
+# playlists = playlists.withColumn("row_number", row_number().over(window))
+# playlists = playlists.filter(playlists["row_number"] == 1).drop("row_number")
 # TODO pegar a última ocorrência de cada plalist pela data
 
 tracks =   spark.read.json("hdfs://localhost:9000/datasets/spotify/tracks.json")
-tracks = tracks.join(playlists, tracks["pid_playlist"] == playlists["pid"]).groupBy("artist_uri").count()
+tracks = tracks.join(playlists, tracks["pid"] == playlists["pid"], ).groupBy("artist_uri", "artist_name").count()
 tracks = tracks.orderBy(desc("count"))
 tracks.limit(5).show()
-playlists = playlists.groupBy("pid").count()
-playlists = playlists.orderBy(desc("count"))
-playlists.limit(5).show()
+
 
 spark.stop()
+
+
+# 
