@@ -29,6 +29,7 @@ num_tracks: the number of tracks in the playlist.
 Each JSON object representing a track (in tracks.json) contains the following fields:
 
 ```
+
 ```json
 
 pid_playlist: the ID of the playlist containing the track;
@@ -65,12 +66,14 @@ A simple way to remove outliers is using an Interquartile Range Rule (IQRR), a t
 
 Because the data is well-structured, Spark's DataFrame is a good and well-documented interface, with a set of operators to handle Big Data in Spark. The DataFrame abstraction offers operators like read.json, filter, groupby, and join that can be used in this exercise. Spark parallelizes the execution of these operators, making computation significantly faster than on a single-thread program (as one would get when using Pandas). This tutorial provides an introduction to PySpark DataFrames and contains several examples.
 
-2. Finding the most popular artists over time
+## 2. Finding the most popular artists over time
+
 Finding popular artists can be interesting to analyze user tendencies and to inform organizations preparing advertising campaigns. In this task, find the five most popular artists ranked by the number of playlists they appear in. Create a chart that shows the number of playlists containing each of these five artists over the years. Consider that an artist is present in a playlist after each playlist's last modification date.
 
 The matplotlib library supports building rich graphs directly from Python. This page provides instructions on how to plot line graphs, as needed in this task.
 
-3. Playlists's behavior
+## 3. Playlists's behavior
+
 Playlist to collect different songs by user preference, musical genre, or a variety of other relationships. In this sense, your task is analyzing how playlists are being created. What is more common, playlists where there are many songs by the same artist or playlists with more diverse songs? To answer this question, compute the prevalence of the most frequent artist in each playlist, defined as the fraction of songs by the most frequent artist. Then create a Cumulative Distribution Function (CDF) plot containing the distribution of artist prevalence across all playlists.
 
 > The Cumulative Distribution Function (CDF), of a real-valued random variable V, evaluated at x, is the probability function that V will take a value less than or equal to x. CDFs are used to describe the probability distribution of random variables.
