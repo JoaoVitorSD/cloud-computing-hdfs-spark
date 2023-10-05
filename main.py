@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 spark = SparkSession.builder.appName("HelloLines").getOrCreate()
 spark.sparkContext.setLogLevel("WARN")
-# STEP - 1 - Songs Duration 
+# Task - 1 - Songs Duration 
 tracks = spark.read.json("hdfs://localhost:9000/datasets/spotify/tracks.json")
 # Tabela antes da filtragem de outlier
 minimun = tracks.agg({"duration_ms": "min"}).collect()[0][0]
